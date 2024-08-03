@@ -25,13 +25,6 @@ This project extracts text from an image and converts it into JSON format.
 4. **Display/Export JSON**
    - Show the JSON data on the screen and offer an option to export it.
 
-## Evaluation Criteria
-
-- How well the app integrates with the camera and gallery.
-- The effectiveness of the OCR in extracting text.
-- The accuracy and organization of the JSON data.
-- The overall quality of the code and documentation.
-
 ## Packages Used
 
 - `image_picker`: To select images from the gallery or take new ones.
@@ -50,6 +43,17 @@ This project extracts text from an image and converts it into JSON format.
 ## State Management
 
 - **Provider**: Manages the state of the application.
+
+## Sample Screenshots
+![49132ead-f138-418b-ba4c-956eefdf7b2a](https://github.com/user-attachments/assets/d38d615d-4cce-4129-9088-18e8f9217271)
+![4b921576-1139-4c61-ba3a-e254d77c39fb](https://github.com/user-attachments/assets/f5adc13e-5cf4-4a14-8a07-c617c3c81958)
+![55c4338f-8a75-44ca-8b0c-3428da11cdf5](https://github.com/user-attachments/assets/0679c577-5a53-4ea6-901f-22ee7199584c)
+![a236289d-52![b63fa4c1-227d-430a-813a-1e06c0c326c2](https://github.com/user-attachments/assets/f24fca66-0226-4c79-aca9-a7f63342df22)
+a1-40bc-aac9-6907b26d4936](https://github.com/user-attachments/assets/b53ceaf9-58ff-45c7-b42c-7a85278c081c)
+![a1f2b6f2-a235-49da-8638-16cc640d3869](https://github.com/user-attachments/assets/c3e2304c-a6b5-44bc-bc50-8217741c2a9a)
+![b78a2c5e-ec98-4b59-bfac-e78f3cbcda35](https://github.com/user-attachments/assets/c1f59b24-62fb-438f-81c9-705fa2623a15)
+
+
 
 ## Installation
 
