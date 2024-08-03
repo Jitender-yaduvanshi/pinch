@@ -59,4 +59,4 @@ a1-40bc-aac9-6907b26d4936](https://github.com/user-attachments/assets/b53ceaf9-5
 
 1. Clone the repository:
    ```sh
-   git clone <repository-url>
+   git clone https://github.com/Jitender-yaduvanshi/pinch.git
