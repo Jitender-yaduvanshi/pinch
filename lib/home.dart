@@ -58,7 +58,11 @@ class ImagePickerScreen extends StatelessWidget {
                       imageProvider.image != null
                           ? Image.file(File(imageProvider.image!.path), height: height * 0.55, width: height * 0.5, fit: BoxFit.cover)
                           : const Text('No image selected.'),
-                      if (imageProvider.isLoading) const Center(child: CircularProgressIndicator()),
+                      if (imageProvider.isLoading) Positioned(
+                        top: MediaQuery.of(context).size.height / 2 - 200,
+                        left: MediaQuery.of(context).size.width / 2 - 13,
+                        child: const Center(child: CircularProgressIndicator()),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
