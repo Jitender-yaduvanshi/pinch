@@ -3,9 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:printing/printing.dart';
-
-import "package:pdf/widgets.dart" as pw;
-
+import 'package:pdf/widgets.dart' as pw;
 import 'package:permission_handler/permission_handler.dart';
 import 'image_provider.dart';
 
@@ -21,15 +19,11 @@ class JsonDisplayScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.save),
-            onPressed: () async {
-              await _savePdf(context);
-            },
+            onPressed: () => _savePdf(context),
           ),
           IconButton(
             icon: const Icon(Icons.share),
-            onPressed: () async {
-              await _sharePdf(context);
-            },
+            onPressed: () => _sharePdf(context),
           ),
         ],
       ),
@@ -37,8 +31,8 @@ class JsonDisplayScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Consumer<ImageTakenProvider>(
           builder: (context, imageTakenProvider, child) {
-            String prettyJson = const JsonEncoder.withIndent('  ')
-                .convert(jsonDecode(imageTakenProvider.jsonDataText));
+            final prettyJson = const JsonEncoder.withIndent('  ').convert(
+                jsonDecode(imageTakenProvider.jsonDataText));
 
             return SingleChildScrollView(
               child: Column(
@@ -72,30 +66,18 @@ class JsonDisplayScreen extends StatelessWidget {
 
   Future<void> _savePdf(BuildContext context) async {
     final imageTakenProvider =
-        Provider.of<ImageTakenProvider>(context, listen: false);
+    Provider.of<ImageTakenProvider>(context, listen: false);
     final pdf = pw.Document();
-    String prettyJson = const JsonEncoder.withIndent('  ')
+    final prettyJson = const JsonEncoder.withIndent('  ')
         .convert(jsonDecode(imageTakenProvider.jsonDataText));
 
-    pdf.addPage(
-      pw.Page(
-        build: (pw.Context context) {
-          return pw.Center(
-            child: pw.Text(prettyJson),
-          );
-        },
-      ),
-    );
+    pdf.addPage(pw.Page(
+      build: (context) => pw.Center(child: pw.Text(prettyJson)),
+    ));
 
-    // Request permission to access external storage
-    var status = await Permission.storage.request();
-    if (status.isGranted) {
-      // Get the external storage directory
+    if (await Permission.storage.request().isGranted) {
       final directory = Directory('/storage/emulated/0/Documents/PDF');
-      if (!await directory.exists()) {
-        await directory.create(recursive: true);
-      }
-
+      if (!await directory.exists()) await directory.create(recursive: true);
       final file = File('${directory.path}/extracted_json.pdf');
       await file.writeAsBytes(await pdf.save());
       ScaffoldMessenger.of(context)
@@ -108,22 +90,18 @@ class JsonDisplayScreen extends StatelessWidget {
 
   Future<void> _sharePdf(BuildContext context) async {
     final imageTakenProvider =
-        Provider.of<ImageTakenProvider>(context, listen: false);
+    Provider.of<ImageTakenProvider>(context, listen: false);
     final pdf = pw.Document();
-    String prettyJson = const JsonEncoder.withIndent('  ')
+    final prettyJson = const JsonEncoder.withIndent('  ')
         .convert(jsonDecode(imageTakenProvider.jsonDataText));
 
-    pdf.addPage(
-      pw.Page(
-        build: (pw.Context context) {
-          return pw.Center(
-            child: pw.Text(prettyJson),
-          );
-        },
-      ),
-    );
+    pdf.addPage(pw.Page(
+      build: (context) => pw.Center(child: pw.Text(prettyJson)),
+    ));
 
     await Printing.sharePdf(
-        bytes: await pdf.save(), filename: 'extracted_json.pdf');
+      bytes: await pdf.save(),
+      filename: 'extracted_json.pdf',
+    );
   }
 }

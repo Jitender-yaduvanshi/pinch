@@ -6,15 +6,15 @@ import 'image_provider.dart';
 void main() {
   runApp(
     MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ImageTakenProvider()),
-      ],
-      child: MyApp(),
+      providers: [ChangeNotifierProvider(create: (_) => ImageTakenProvider())],
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

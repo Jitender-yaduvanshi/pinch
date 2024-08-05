@@ -40,7 +40,7 @@ class ImagePickerScreen extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.history_rounded),
-              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => HistoryScreen())),
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const HistoryScreen())),
             ),
             SizedBox(width: width * 0.03),
           ],

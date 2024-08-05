@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HistoryScreen extends StatefulWidget {
+  const HistoryScreen({super.key});
+
   @override
-  _HistoryScreenState createState() => _HistoryScreenState();
+  HistoryScreenState createState() => HistoryScreenState();
 }
 
-class _HistoryScreenState extends State<HistoryScreen> {
+class HistoryScreenState extends State<HistoryScreen> {
   List<String> imagePaths = [];
 
   @override
@@ -26,9 +28,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
   void _showFullImage(String imagePath) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
-          contentPadding: EdgeInsets.all(5),
+          contentPadding: const EdgeInsets.all(5),
           backgroundColor: Colors.grey,
           content: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
@@ -48,17 +50,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Images Used'),
+        title: const Text('Images Used'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: imagePaths.isEmpty
-            ? Center(child: Text('No images found'))
+            ? const Center(child: Text('No images found'))
             : GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // 2 images per row
-                  crossAxisSpacing: 8.0, // Spacing between images
-                  mainAxisSpacing: 8.0, // Spacing between rows
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
                 ),
                 itemCount: imagePaths.length,
                 itemBuilder: (context, index) {

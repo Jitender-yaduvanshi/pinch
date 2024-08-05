@@ -19,7 +19,7 @@ class ImageTakenProvider with ChangeNotifier {
   String get extractedText => _extractedText;
   bool get isLoading => _isLoading;
 
-  imageProvider() {
+  ImageTakenProvider() {
     _loadImagePaths();
   }
 
@@ -66,14 +66,13 @@ class ImageTakenProvider with ChangeNotifier {
     request.headers.addAll(headers);
 
     try {
-      http.StreamedResponse response = await request.send();
+      final response = await request.send();
+      final responseBody = await response.stream.bytesToString();
 
       if (response.statusCode == 200) {
-        String responseBody = await response.stream.bytesToString();
-        var jsonData = jsonDecode(responseBody);
+        final jsonData = jsonDecode(responseBody);
         _jsonDataText = responseBody;
-        _extractedText = jsonData['ParsedResults'] != null &&
-                jsonData['ParsedResults'].isNotEmpty
+        _extractedText = jsonData['ParsedResults']?.isNotEmpty ?? false
             ? jsonData['ParsedResults'][0]['ParsedText'] ?? 'No text found'
             : 'No OCR result found';
       } else {

@@ -8,14 +8,13 @@ import 'json_screen.dart';
 class DisplayTextScreen extends StatelessWidget {
   final String imagePath;
 
-  DisplayTextScreen({super.key, required this.imagePath});
+  const DisplayTextScreen({super.key, required this.imagePath});
 
   Future<void> _saveImage(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
-    List<String> imagePaths = prefs.getStringList('imagePaths') ?? [];
+    final imagePaths = prefs.getStringList('imagePaths') ?? [];
     imagePaths.add(imagePath);
     await prefs.setStringList('imagePaths', imagePaths);
-
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Image saved')),
     );
@@ -23,10 +22,8 @@ class DisplayTextScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.sizeOf(context).width;
-    double height = MediaQuery.sizeOf(context).height;
-    final imageTakenProvider =
-        Provider.of<ImageTakenProvider>(context, listen: false);
+    final width = MediaQuery.sizeOf(context).width;
+    final imageTakenProvider = Provider.of<ImageTakenProvider>(context, listen: false);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await imageTakenProvider.imageDecode(imagePath);
@@ -41,23 +38,17 @@ class DisplayTextScreen extends StatelessWidget {
             child: const Icon(Icons.save),
             onTap: () => _saveImage(context),
           ),
-          SizedBox(
-            width: width * 0.03,
-          ),
+          SizedBox(width: width * 0.03),
           GestureDetector(
             child: const Text('JSON'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const JsonDisplayScreen(),
-                ),
+                MaterialPageRoute(builder: (context) => const JsonDisplayScreen()),
               );
             },
           ),
-          SizedBox(
-            width: width * 0.03,
-          ),
+          SizedBox(width: width * 0.03),
         ],
       ),
       body: Consumer<ImageTakenProvider>(
